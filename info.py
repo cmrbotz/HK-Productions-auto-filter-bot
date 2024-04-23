@@ -13,20 +13,20 @@ def is_enabled(value, default):
 
 # Bot information
 SESSION = environ.get('SESSION', 'Media_search')
-API_ID = int(environ.get('API_ID', ''))
-API_HASH = environ.get('API_HASH', '')
-BOT_TOKEN = environ.get('BOT_TOKEN', "")
+API_ID = int(environ.get('API_ID', '28280795'))
+API_HASH = environ.get('API_HASH', '3f02c2df6069de8c1a2abf623da0a4b8')
+BOT_TOKEN = environ.get('BOT_TOKEN', "7095049952:AAE14vDKzvTW9H77w0BwS8w2QyyVRmBAMrg")
 
 # Bot settings
 CACHE_TIME = int(environ.get('CACHE_TIME', 300))
 USE_CAPTION_FILTER = bool(environ.get('USE_CAPTION_FILTER', True))
 
-PICS = (environ.get('PICS', 'https://graph.org/file/53299161712df11375fb5.jpg')).split() #SAMPLE PIC
+PICS = (environ.get('PICS', 'https://telegra.ph/file/602c411e3b6c444c24a4a.jpg')).split() #SAMPLE PIC
 NOR_IMG = environ.get("NOR_IMG", "https://graph.org/file/e20b5fdaf217252964202.jpg")
 MELCOW_VID = environ.get("MELCOW_VID", "https://graph.org/file/62b41eeb4b5a1d1cc5efa.mp4")
 SPELL_IMG = environ.get("SPELL_IMG", "https://telegra.ph/file/86b7b7e2aa7e38f328902.jpg")
 SUBSCRIPTION = (environ.get('SUBSCRIPTION', 'https://graph.org/file/72763ab73f27d460137c4.jpg'))
-CODE = (environ.get('CODE', 'https://t.me/About_HK_Bot/2'))
+CODE = (environ.get('CODE', 'https://t.me/MOVIES_VILLA_UPDATE/75'))
 
 #stream link shortner
 STREAM_SITE = (environ.get('STREAM_SITE', 'paisakamalo.in'))
