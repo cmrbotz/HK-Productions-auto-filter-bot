@@ -51,7 +51,7 @@ NO_RESULTS_MSG = bool(environ.get("NO_RESULTS_MSG", False))
 
 # Online Stream and Download
 STREAM_MODE = bool(environ.get('STREAM_MODE', True)) # Set True or Flase
-SURL = environ.get("SURL", "")
+SURL = environ.get("SURL", "https://stream1-b4c55bd8bb62.herokuapp.com/")
 
 # MongoDB information
 DATABASE_URI = environ.get('DATABASE_URI', "mongodb+srv://Stream1:0@cluster0.ramk90v.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
