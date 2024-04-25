@@ -4,7 +4,9 @@ from pymongo import MongoClient
 from info import DATABASE_NAME, DATABASE_URI, DATABASE_URI2, IMDB, IMDB_TEMPLATE, MELCOW_NEW_USERS, P_TTI_SHOW_OFF, SINGLE_BUTTON, SPELL_CHECK_REPLY, PROTECT_CONTENT, AUTO_DELETE, MAX_BTN, AUTO_FFILTER, SHORTLINK_API, SHORTLINK_URL, IS_SHORTLINK, TUTORIAL, IS_TUTORIAL
 import datetime
 import pytz
-
+import re
+from pymongo.errors import DuplicateKeyError
+import time
 
 my_client = MongoClient(DATABASE_URI)
 mydb = my_client["referal_user"]
