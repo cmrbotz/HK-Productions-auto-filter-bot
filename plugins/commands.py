@@ -163,8 +163,7 @@ async def start(client, message):
                     await delete_all_referal_users(user_id)
                     await client.send_message(chat_id = user_id, text = "<b>Yᴏᴜ Hᴀᴠᴇ Sᴜᴄᴄᴇssғᴜʟʟʏ Cᴏᴍᴘʟᴇᴛᴇᴅ Tᴏᴛᴀʟ Rᴇғᴇʀᴀʟ.\n\nYᴏᴜ Aᴅᴅᴇᴅ Iɴ Pʀᴇᴍɪᴜᴍ Fᴏʀ {}</b>".format(REFERAL_PREMEIUM_TIME))
                     return 
-        
-        
+else:    
     if len(message.command) == 2 and message.command[1] in ["premium"]:
         buttons = [[
                     InlineKeyboardButton('📲 ꜱᴇɴᴅ ᴘᴀʏᴍᴇɴᴛ ꜱᴄʀᴇᴇɴꜱʜᴏᴛ', user_id=int(6651109872))
