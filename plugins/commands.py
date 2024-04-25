@@ -148,8 +148,8 @@ async def start(client, message):
         data = message.command[1]
     if data.split("-", 1)[0] == "mv-stream":
         user_id = int(data.split("-", 1)[1])
-        vj = await referal_add_user(user_id, message.from_user.id)
-        if vj and PREMIUM_AND_REFERAL_MODE == True:
+        mv-stream = await referal_add_user(user_id, message.from_user.id)
+        if mv-stream and PREMIUM_AND_REFERAL_MODE == True:
             await message.reply(f"<b>Yᴏᴜ ʜᴀᴠᴇ Jᴏɪɴᴇᴅ ᴜsɪɴɢ ᴛʜᴇ ʀᴇғᴇʀʀᴀʟ ʟɪɴᴋ ᴏғ ᴜsᴇʀ ᴡɪᴛʜ ID {user_id}\n\nsᴇɴᴅ /start ᴀɢᴀɪɴ ᴛᴏ ᴜsᴇ ᴛʜᴇ ʙᴏᴛ</b>")
             num_referrals = await get_referal_users_count(user_id)
             await client.send_message(chat_id = user_id, text = "<b>{} sᴛᴀʀᴛ ᴛʜᴇ ʙᴏᴛ ᴡɪᴛʜ ʏᴏᴜʀ ʀᴇғᴇʀʀᴀʟ ʟɪɴᴋ\n\nTᴏᴛᴀʟ Rᴇғᴇʀᴀʟs - {}</b>".format(message.from_user.mention, num_referrals))
