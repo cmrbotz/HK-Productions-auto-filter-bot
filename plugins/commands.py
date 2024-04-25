@@ -148,11 +148,11 @@ async def start(client, message):
     data = message.command[1]
     if data.split("-", 1)[0] == "VJ":
         user_id = int(data.split("-", 1)[1])
-        VJ = await referal_add_user(user_id, message.from_user.id)
-        if VJ and PREMIUM_AND_REFERAL_MODE == True:
-            await message.reply(f"<b>Yᴏᴜ ʜᴀᴠᴇ Jᴏɪɴᴇᴅ ᴜsɪɴɢ ᴛʜᴇ ʀᴇғᴇʀʀᴀʟ ʟɪɴᴋ ᴏғ ᴜsᴇʀ ᴡɪᴛʜ ID {user_id}\n\nsᴇɴᴅ /start ᴀɢᴀɪɴ ᴛᴏ ᴜsᴇ ᴛʜᴇ ʙᴏᴛ</b>")
+        vj = await referal_add_user(user_id, message.from_user.id)
+        if vj and PREMIUM_AND_REFERAL_MODE == True:
+            await message.reply(f"<b>You have joined using the referral link of user with ID {user_id}\n\nSend /start again to use the bot</b>")
             num_referrals = await get_referal_users_count(user_id)
-            await client.send_message(chat_id = user_id, text = "<b>{} sᴛᴀʀᴛ ᴛʜᴇ ʙᴏᴛ ᴡɪᴛʜ ʏᴏᴜʀ ʀᴇғᴇʀʀᴀʟ ʟɪɴᴋ\n\nTᴏᴛᴀʟ Rᴇғᴇʀᴀʟs - {}</b>".format(message.from_user.mention, num_referrals))
+            await client.send_message(chat_id = user_id, text = "<b>{} start the bot with your referral link\n\nTotal Referals - {}</b>".format(message.from_user.mention, num_referrals))
             if num_referrals == REFERAL_COUNT:
                 time = REFERAL_PREMEIUM_TIME       
                 seconds = await get_seconds(time)
@@ -161,10 +161,9 @@ async def start(client, message):
                     user_data = {"id": user_id, "expiry_time": expiry_time} 
                     await db.update_user(user_data)  # Use the update_user method to update or insert user data
                     await delete_all_referal_users(user_id)
-                    await client.send_message(chat_id = user_id, text = "<b>Yᴏᴜ Hᴀᴠᴇ Sᴜᴄᴄᴇssғᴜʟʟʏ Cᴏᴍᴘʟᴇᴛᴇᴅ Tᴏᴛᴀʟ Rᴇғᴇʀᴀʟ.\n\nYᴏᴜ Aᴅᴅᴇᴅ Iɴ Pʀᴇᴍɪᴜᴍ Fᴏʀ {}</b>".format(REFERAL_PREMEIUM_TIME))
+                    await client.send_message(chat_id = user_id, text = "<b>You Have Successfully Completed Total Referal.\n\nYou Added In Premium For {}</b>".format(REFERAL_PREMEIUM_TIME))
                     return 
-         else:  
-             
+        else:
      if len(message.command) == 2 and message.command[1] in ["premium"]:
          buttons = [[
                     InlineKeyboardButton('📲 ꜱᴇɴᴅ ᴘᴀʏᴍᴇɴᴛ ꜱᴄʀᴇᴇɴꜱʜᴏᴛ', user_id=int(6651109872))
