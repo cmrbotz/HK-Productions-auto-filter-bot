@@ -1857,7 +1857,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         )
     elif query.data == "subscription":
         buttons = [[
-            InlineKeyboardButton("🕳️ɪɴᴠɪᴛᴇ ʟɪɴᴋ🕳️", url="https://telegram.me/Mv_stream_bot?start=VJ-6651109872"),
+            InlineKeyboardButton("🕳️ɪɴᴠɪᴛᴇ ʟɪɴᴋ🕳️", url="https://telegram.me/{}?start=VJ-{}"),
             InlineKeyboardButton('⇚Back', callback_data='start')
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
