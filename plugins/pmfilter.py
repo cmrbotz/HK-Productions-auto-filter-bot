@@ -1528,7 +1528,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
 
     elif query.data == "start":
         if PREMIUM_AND_REFERAL_MODE == True:
-        buttons = [[
+            buttons = [[
                     InlineKeyboardButton('➕ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ➕', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
                 ],[
                     InlineKeyboardButton('▪️ ᴜᴘᴅᴀᴛᴇꜱ ▪️', callback_data='channels')
