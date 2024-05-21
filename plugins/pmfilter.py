@@ -5,6 +5,7 @@ import ast
 import math
 import random
 import pytz
+from database.refer import referdb
 from datetime import datetime, timedelta, date, time
 lock = asyncio.Lock()
 from database.users_chats_db import db
@@ -114,6 +115,27 @@ async def pm_text(bot, message):
         chat_id=LOG_CHANNEL,
         text=f"<b>#𝐏𝐌_𝐌𝐒𝐆\n\nNᴀᴍᴇ : {user}\n\nID : {user_id}\n\nMᴇssᴀɢᴇ : {content}</b>"
     )
+
+
+@Client.on_callback_query(filters.regex(r"^reffff"))
+async def refercall(bot, query):
+    btn = [[
+        InlineKeyboardButton('invite link', url=f'https://telegram.me/share/url?url=https://t.me/{bot.me.username}?start=reff_{query.from_user.id}&text=Hello%21%20Experience%20a%20bot%20that%20offers%20a%20vast%20library%20of%20unlimited%20movies%20and%20series.%20%F0%9F%98%83'),
+        InlineKeyboardButton(f'⏳ {referdb.get_refer_points(query.from_user.id)}', callback_data='ref_point'),
+        InlineKeyboardButton('Back', callback_data='start')
+    ]]
+    reply_markup = InlineKeyboardMarkup(btn)
+    await bot.edit_message_media(
+            query.message.chat.id, 
+            query.message.id, 
+            InputMediaPhoto("https://graph.org/file/1a2e64aee3d4d10edd930.jpg")
+        )
+    await query.message.edit_text(
+        text=f'Hay Your refer link:\n\nhttps://t.me/{bot.me.username}?start=reff_{query.from_user.id}\n\nShare this link with your friends, Each time they join,  you will get 10 refferal points and after 100 points you will get 1 month premium subscription.',
+        reply_markup=reply_markup,
+        parse_mode=enums.ParseMode.HTML
+        )
+    await query.answer()
 
 @Client.on_callback_query(filters.regex(r"^next"))
 async def next_page(bot, query):
@@ -1855,22 +1877,10 @@ async def cb_handler(client: Client, query: CallbackQuery):
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
         )
-    elif query.data == "subscription":
-        buttons = [[
-            InlineKeyboardButton("🕳️ɪɴᴠɪᴛᴇ ʟɪɴᴋ🕳️", url="https://t.me/share/url?url=%F0%9F%A4%9F%CA%9C%E1%B4%87%CA%9F%CA%9F%E1%B4%8F%20%D2%93%CA%80%C9%AA%E1%B4%87%C9%B4%E1%B4%85.%F0%9F%98%8E%0A%0Ahttps%3A//t.me/%7Btemp.U_NAME%7D%3Fstart%3Dreff_%7Bquery.from_user.id%7D%0A%0A%F0%9F%92%96T%CA%9C%E1%B4%87%CA%80%E1%B4%87%20%E1%B4%80%CA%80%E1%B4%87%20%E1%B4%8D%E1%B4%80%C9%B4%CA%8F%20%C9%B4%E1%B4%87%E1%B4%A1%20%E1%B4%8D%E1%B4%8F%E1%B4%A0%C9%AA%E1%B4%87s%20%CA%9C%E1%B4%87%CA%80%E1%B4%87%2C%20%CA%8F%E1%B4%8F%E1%B4%9C%20J%E1%B4%9Cs%E1%B4%9B%20%CA%9C%E1%B4%80%E1%B4%A0%E1%B4%87%20%E1%B4%9B%E1%B4%8F%20s%CA%9C%E1%B4%80%CA%80%E1%B4%87%20%E1%B4%9B%CA%9C%C9%AAs%20%CA%99%E1%B4%8F%E1%B4%80%E1%B4%9B%20%E1%B4%A1%C9%AA%E1%B4%9B%CA%9C%F0%9F%A5%B4%20%F0%9D%9F%B8%F0%9D%9F%B6%20%E1%B4%98%E1%B4%87%E1%B4%8F%E1%B4%98%CA%9F%E1%B4%87.%20%20A%C9%B4%E1%B4%85%20%E1%B4%87%C9%B4J%E1%B4%8F%CA%8F%20%E1%B4%80%CA%9F%CA%9F%20%E1%B4%9B%CA%9C%E1%B4%87%20%E1%B4%8D%E1%B4%8F%E1%B4%A0%C9%AA%E1%B4%87s%20%E1%B4%A1%C9%AA%E1%B4%9B%CA%9C%E1%B4%8F%E1%B4%9C%E1%B4%9B%20%E1%B4%80%E1%B4%85s%20%E1%B4%80%C9%B4%E1%B4%85%20%E1%B4%A1%C9%AA%E1%B4%9B%CA%9C%E1%B4%8F%E1%B4%9C%E1%B4%9B%20s%CA%9C%E1%B4%8F%CA%80%E1%B4%9B%E1%B4%87%C9%B4%E1%B4%87%CA%80s.%F0%9F%94%B0%F0%9F%94%B0%0A%0A%20%E2%9C%85%E0%A4%AF%E0%A4%B9%E0%A4%BE%E0%A4%82%20%E0%A4%95%E0%A4%88%20%E0%A4%A8%E0%A4%88%20%E0%A4%AB%E0%A4%BF%E0%A4%B2%E0%A5%8D%E0%A4%AE%E0%A5%87%E0%A4%82%20%E0%A4%B9%E0%A5%88%E0%A4%82%2C%20%E0%A4%86%E0%A4%AA%E0%A4%95%E0%A5%8B%20%E0%A4%AC%E0%A4%B8%20%E0%A4%87%E0%A4%B8%20%CA%99%E1%B4%8F%E1%B4%9B%20%E0%A4%95%E0%A5%8B%20%F0%9D%9F%B8%F0%9D%9F%B6%20%E0%A4%B2%E0%A5%8B%E0%A4%97%E0%A5%8B%E0%A4%82%20%E0%A4%95%E0%A5%87%20%F0%9F%92%90%E0%A4%B8%E0%A4%BE%E0%A4%A5%20%E0%A4%B8%E0%A4%BE%E0%A4%9D%E0%A4%BE%20%E0%A4%95%E0%A4%B0%E0%A4%A8%E0%A4%BE%20%E0%A4%B9%E0%A5%8B%E0%A4%97%E0%A4%BE%E0%A5%A4%20%E0%A4%94%E0%A4%B0%20%E0%A4%AC%E0%A4%BF%E0%A4%A8%E0%A4%BE%20%E1%B4%80%E1%B4%85s%20%E0%A4%94%E0%A4%B0%20%E0%A4%AC%E0%A4%BF%E0%A4%A8%E0%A4%BE%20%E0%A4%B6%E0%A5%89%E0%A4%B0%E0%A5%8D%E0%A4%9F%E0%A4%A8%E0%A4%B0%20%E0%A4%95%E0%A5%87%20%E0%A4%B8%E0%A4%AD%E0%A5%80%20%E0%A4%AB%E0%A4%BF%E0%A4%B2%E0%A5%8D%E0%A4%AE%E0%A5%8B%E0%A4%82%20%E0%A4%95%E0%A4%BE%20%E0%A4%86%E0%A4%A8%E0%A4%82%E0%A4%A6%20%E0%A4%B2%E0%A5%87%E0%A4%82%E0%A5%A4%F0%9F%A5%B3%F0%9F%A5%B3"),
-            InlineKeyboardButton('⇚Back', callback_data='start')
-        ]]
-        reply_markup = InlineKeyboardMarkup(buttons)
-        await client.edit_message_media(
-            query.message.chat.id, 
-            query.message.id, 
-            InputMediaPhoto(random.choice(PICS))
-        )
-        await query.message.edit_text(
-            text=script.SUBSCRIPTION_TXT.format(REFERAL_PREMEIUM_TIME, temp.U_NAME, query.from_user.id, REFERAL_COUNT),
-            reply_markup=reply_markup,
-            parse_mode=enums.ParseMode.HTML
-       )
+
+    elif query.data == "ref_point":
+        await query.answer(f'You Have: {referdb.get_refer_points(query.from_user.id)} Refferal points.', show_alert=True)
+    
     elif query.data == "rfrsh":
         await query.answer("ꜰᴇᴛᴄʜɪɴɢ ᴍᴏɴɢᴏ-ᴅʙ ᴅᴀᴛᴀʙᴀꜱᴇ...")
         buttons = [[
